@@ -1,0 +1,54 @@
+---
+title: "Visualization samples"
+output: github_document
+---
+
+``` {r ref, echo=FALSE, message=FALSE, warning=FALSE}
+library(choroplethr)
+library(choroplethrMaps)
+library(gridExtra) # to control the output structure
+```
+
+## Choropleth maps
+
+Below are some examples of a simple choropleth map using choroplethR from Ari Lamstein, which is a terrific package.
+
+First, here is the population for a select number of southern states using the ACS data set and the most recent 5 year file.
+```{r pop, echo=FALSE, message=FALSE, warning=FALSE}
+county_choropleth_acs(tableId="B01003", endyear = 2011, span = 5, num_colors = 1, state_zoom = c("tennessee", "georgia", "alabama", "mississippi"))
+```
+
+And then, using the same data source, here is a snapshot of income for the same states.
+```{r choro, echo=FALSE, message=FALSE, warning=FALSE}
+income_region <- county_choropleth_acs("B19301", num_colors = 1, state_zoom = c("tennessee", "georgia", "alabama", "mississippi") )
+income_tn <- county_choropleth_acs("B19301", num_colors = 1, state_zoom = "tennessee")
+
+#grid.arrange(income_region, income_tn, ncol=2)
+income_region
+```
+
+#### Examining distribution of race within Tennessee
+
+(work in progress)
+
+```{r chorogrid, eval=FALSE, echo=FALSE, message=FALSE, warning=FALSE}
+df_white <- county_choropleth_acs("B02008", num_colors = 1, state_zoom = "tennessee")
+df_black <- county_choropleth_acs("B02009", num_colors = 1, state_zoom = "tennessee")
+#df_hisp <- county_choropleth_acs("B03002", num_colors = 1, state_zoom = "tennessee")
+
+# TO DO:
+# grid.arrange(df_white, df_black, df_hisp, ncol=3)
+
+df_white
+
+df_black
+
+#df_hisp
+
+```
+
+
+## Leaflet maps (to come)
+
+
+
